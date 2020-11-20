@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <data class="ItemContainerTVShowsBinding">
+        <variable
+            name="tvShow"
+            type="com.shoaib.tvshowsmvvm.models.TVShow" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp"
+        >
+
+
+
+        <View
+            android:id="@+id/viewBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/textName"
+            app:layout_constraintBottom_toBottomOf="@id/viewSupporter"
+            android:background="@drawable/background_tv_show"
+            android:paddingBottom="@dimen/_10sdp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageTvShow"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_110sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:scaleType="centerCrop"
+            android:imageURL="@{tvShow.thumbnail}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/_4sdp" />
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{tvShow.name}"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toEndOf="@id/imageTvShow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imageTvShow"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/colorTextPrimary"
+            android:paddingTop="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/textNetwork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{tvShow.network + "(" + tvShow.country + ")"}'
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu"
+            android:includeFontPadding="false"
+            android:textColor="@color/colorTextOther"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="@id/textName"
+            app:layout_constraintStart_toStartOf="@id/textName"
+            app:layout_constraintTop_toBottomOf="@id/textName" />
+
+
+        <TextView
+            android:id="@+id/textStarted"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{"Started on: " + tvShow.startDate}'
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu"
+            android:includeFontPadding="false"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="@id/textName"
+            app:layout_constraintEnd_toEndOf="@id/textName"
+            app:layout_constraintTop_toBottomOf="@id/textNetwork" />
+
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{tvShow.status}"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu"
+            android:includeFontPadding="false"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="@id/textName"
+            app:layout_constraintEnd_toEndOf="@id/textName"
+            app:layout_constraintTop_toBottomOf="@id/textStarted" />
+
+        <View
+            android:id="@+id/viewSupporter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/imageTvShow" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
