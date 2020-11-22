@@ -9,7 +9,7 @@ import com.squareup.picasso.Picasso;
 
 public class BindingAdapters {
 
-    //TODO: how BindingAdapters works with MVVM ?
+    //TODO: how BindingAdapters/imageURL works with MVVM ?
     @BindingAdapter("android:imageURL")
     public static void setImageURl(ImageView imageView, String URL){
         try{

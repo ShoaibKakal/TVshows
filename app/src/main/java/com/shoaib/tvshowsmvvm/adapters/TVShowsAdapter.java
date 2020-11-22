@@ -38,7 +38,7 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TVShowsV
 
     @Override
     public void onBindViewHolder(@NonNull TVShowsViewHolder holder, int position) {
-        holder.bindTVSho(tvShows.get(position));
+        holder.bindTVShow(tvShows.get(position));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TVShowsV
             this.itemContainerTVShowsBinding = itemContainerTVShowsBinding;
         }
 
-        public void bindTVSho(TVShow tvShow) {
+        public void bindTVShow(TVShow tvShow) {
             itemContainerTVShowsBinding.setTvShow(tvShow);
             itemContainerTVShowsBinding.executePendingBindings();
             itemContainerTVShowsBinding.getRoot().setOnClickListener(new View.OnClickListener() {
