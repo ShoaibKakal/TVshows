@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
 
         /*TODO: Add animated recyclerview
           TODO: Add automatic imageScroller.
-        / TODO: Add shimmer effect
+          TODO: Add Upcoming Episodes section in detailed Activity.
+          TODO: Add shimmer effect
          */
 
 

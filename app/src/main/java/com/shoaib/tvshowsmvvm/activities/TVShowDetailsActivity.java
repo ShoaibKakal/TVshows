@@ -1,11 +1,14 @@
 package com.shoaib.tvshowsmvvm.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -16,9 +19,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.shoaib.tvshowsmvvm.R;
+import com.shoaib.tvshowsmvvm.adapters.EpisodesAdapter;
 import com.shoaib.tvshowsmvvm.adapters.ImageSliderAdapter;
 import com.shoaib.tvshowsmvvm.databinding.ActivityTVShowDetailsBinding;
+import com.shoaib.tvshowsmvvm.databinding.LayoutEpisodesBottomSheetBinding;
 import com.shoaib.tvshowsmvvm.viewModels.TVShowDetailViewModel;
 
 import java.util.Locale;
@@ -27,6 +34,8 @@ public class TVShowDetailsActivity extends AppCompatActivity {
 
     private ActivityTVShowDetailsBinding activityTVShowDetailsBinding;
     private TVShowDetailViewModel tvShowDetailViewModel;
+    private BottomSheetDialog episodeBottomSheetDialog;
+    private LayoutEpisodesBottomSheetBinding layoutEpisodesBottomSheetBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +93,12 @@ public class TVShowDetailsActivity extends AppCompatActivity {
 
                 activityTVShowDetailsBinding.setRating(String.format(Locale.getDefault(), "%.2f", Double.parseDouble(tvShowDetailsResponse.getTvShowDetails().getRating())));
 
-                if (tvShowDetailsResponse.getTvShowDetails().getGenres() != null){
+                if (tvShowDetailsResponse.getTvShowDetails().getGenres() != null) {
                     activityTVShowDetailsBinding.setGenre(tvShowDetailsResponse.getTvShowDetails().getGenres()[0]);
-                }else{
+                } else {
                     activityTVShowDetailsBinding.setGenre("N/A");
                 }
-                activityTVShowDetailsBinding.setRuntime(tvShowDetailsResponse.getTvShowDetails().getRuntime()+"Min");
+                activityTVShowDetailsBinding.setRuntime(tvShowDetailsResponse.getTvShowDetails().getRuntime() + "Min");
                 activityTVShowDetailsBinding.viewDivider1.setVisibility(View.VISIBLE);
                 activityTVShowDetailsBinding.layoutMisc.setVisibility(View.VISIBLE);
                 activityTVShowDetailsBinding.viewDivider2.setVisibility(View.VISIBLE);
@@ -107,11 +116,42 @@ public class TVShowDetailsActivity extends AppCompatActivity {
                 activityTVShowDetailsBinding.buttonEpisodes.setVisibility(View.VISIBLE);
                 activityTVShowDetailsBinding.buttonWebsite.setVisibility(View.VISIBLE);
 
-
-                activityTVShowDetailsBinding.buttonWebsite.setOnClickListener(new View.OnClickListener() {
+                activityTVShowDetailsBinding.buttonEpisodes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (episodeBottomSheetDialog == null) {
+                            episodeBottomSheetDialog = new BottomSheetDialog(TVShowDetailsActivity.this);
+                            layoutEpisodesBottomSheetBinding = DataBindingUtil.inflate(LayoutInflater.from(TVShowDetailsActivity.this),
+                                    R.layout.layout_episodes_bottom_sheet,
+                                    findViewById(R.id.episodeContainer),
+                                    false);
 
+                            episodeBottomSheetDialog.setContentView(layoutEpisodesBottomSheetBinding.getRoot()
+                            );
+
+                            layoutEpisodesBottomSheetBinding.episodeRecyclerView.setAdapter(
+                                    new EpisodesAdapter(tvShowDetailsResponse.getTvShowDetails().getEpisodes())
+                            );
+
+                            layoutEpisodesBottomSheetBinding.setName(getIntent().getStringExtra("name"));
+
+                            layoutEpisodesBottomSheetBinding.imageClose.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    episodeBottomSheetDialog.dismiss();
+                                }
+                            });
+
+                        }
+
+                        //---- Optional part ---- This will expand bottom sheet to full screen.
+//                        FrameLayout frameLayout = episodeBottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+//                        if (frameLayout != null){
+//                            BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(frameLayout);
+//                            bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+//                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                        }
+                        episodeBottomSheetDialog.show();
                     }
                 });
             }
