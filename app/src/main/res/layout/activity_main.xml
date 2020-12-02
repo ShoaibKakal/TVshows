@@ -65,7 +65,7 @@
 
 
           <ImageView
-              android:id="@id/imageWatchlist"
+              android:id="@+id/imageSearch"
               android:layout_width="@dimen/_24sdp"
               android:layout_height="@dimen/_24sdp"
               android:src="@drawable/ic_search"

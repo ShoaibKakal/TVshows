@@ -1,9 +1,16 @@
 package com.shoaib.tvshowsmvvm.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
-public class TVShow {
+import java.io.Serializable;
 
+@Entity(tableName = "tvShows")
+public class TVShow implements Serializable { //Implement Serializable when need to pass the whole class data from one activity to another in intents instead of passing each variables.
+
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -13,8 +20,17 @@ public class TVShow {
     @SerializedName("start_date")
     private String startDate;
 
-//    @SerializedName("end_date")
-//    private String endDate;
+    @SerializedName("country")
+    private String country;
+
+    @SerializedName("network")
+    private String network;
+
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("image_thumbnail_path")
+    private String thumbnail;
 
     public int getId() {
         return id;
@@ -44,16 +60,31 @@ public class TVShow {
         return thumbnail;
     }
 
-    @SerializedName("country")
-    private String country;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    @SerializedName("network")
-    private String network;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    @SerializedName("status")
-    private String status;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
 
-    @SerializedName("image_thumbnail_path")
-    private String thumbnail;
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }
