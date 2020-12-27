@@ -32,6 +32,8 @@ Thanks goes to these wonderful people:
 ## License
 
 ```
+MIT License
+
 Copyright (c) 2020 Shoaib Khalid
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
